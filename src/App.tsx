@@ -20,29 +20,32 @@ function MapFallback() {
   );
 }
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      { index: true, element: <Dashboard /> },
-      { path: 'gayrimenkuller', element: <Properties /> },
-      { path: 'kiracilar', element: <Tenants /> },
-      {
-        path: 'harita',
-        element: (
-          <Suspense fallback={<MapFallback />}>
-            <MapPage />
-          </Suspense>
-        ),
-      },
-      { path: 'faaliyetler', element: <Activities /> },
-      { path: 'pazar-arastirma', element: <Market /> },
-      { path: 'ai-arama', element: <AiSearch /> },
-      { path: 'guvenlik', element: <Security /> },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        { index: true, element: <Dashboard /> },
+        { path: 'gayrimenkuller', element: <Properties /> },
+        { path: 'kiracilar', element: <Tenants /> },
+        {
+          path: 'harita',
+          element: (
+            <Suspense fallback={<MapFallback />}>
+              <MapPage />
+            </Suspense>
+          ),
+        },
+        { path: 'faaliyetler', element: <Activities /> },
+        { path: 'pazar-arastirma', element: <Market /> },
+        { path: 'ai-arama', element: <AiSearch /> },
+        { path: 'guvenlik', element: <Security /> },
+      ],
+    },
+  ],
+  { basename: import.meta.env.BASE_URL },
+);
 
 export default function App() {
   return (
