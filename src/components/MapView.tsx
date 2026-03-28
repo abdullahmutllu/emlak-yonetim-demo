@@ -194,8 +194,10 @@ export default function MapView({
   const onProvincesLoadErrorRef = useRef(onProvincesLoadError);
   const provincesDataLoadedRef = useRef(false);
   const provincesFitDoneRef = useRef(false);
+  const modeRef = useRef(mode);
   const [mapReady, setMapReady] = useState(false);
 
+  modeRef.current = mode;
   onFeatureClickRef.current = onFeatureClick;
   onMeasureResultRef.current = onMeasureResult;
   onAnalysisCompleteRef.current = onAnalysisComplete;
@@ -304,6 +306,8 @@ export default function MapView({
     ro.observe(el);
 
     map.on('singleclick', (evt) => {
+      // Ölçüm / analiz çizimi sırasında tıklama portföy modalını açmasın
+      if (modeRef.current !== 'idle') return;
       const propLayer = propertyLayerRef.current;
       if (!propLayer) return;
       let found: string | null = null;

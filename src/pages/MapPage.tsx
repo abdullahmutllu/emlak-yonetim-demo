@@ -137,13 +137,15 @@ export default function MapPage() {
 
   const onFeatureClick = useCallback((title: string | null) => {
     setSelected(title);
-    if (title) {
-      setPanelTab('portfolio');
-      const p = properties.find((x) => x.title === title);
-      if (p) {
-        setDetailProperty(p);
-        setDetailModalOpen(true);
-      }
+    if (!title) {
+      setDetailModalOpen(false);
+      return;
+    }
+    setPanelTab('portfolio');
+    const p = properties.find((x) => x.title === title);
+    if (p) {
+      setDetailProperty(p);
+      setDetailModalOpen(true);
     }
   }, []);
 
